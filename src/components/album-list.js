@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { DataContext, FilterContext } from '../context';
+import { FilterContext } from '../context/filter';
+
+import { DataContext } from '../context/data';
 
 import Album from './album';
 
 const AlbumList = () => (
   <FilterContext.Consumer>
-    {({ sortFilter, labelFilter }) =>
+    {({ state: { sortFilter, labelFilter } }) =>
       <DataContext.Consumer>
-        {(albums) => {
+        {({ state: { albums } }) => {
           const sortedAlbums = albums.length && [...albums].sort((a, b) => {
             const titleA = a.title.toUpperCase();
             const titleB = b.title.toUpperCase();
@@ -41,7 +43,7 @@ const AlbumList = () => (
             <div>
               {
                 sortedAlbums.length ?
-                  sortedAlbums.map(({title, year, label}) =>
+                  sortedAlbums.map(({ title, year, label }) =>
                     <Album
                       title={title}
                       year={year}
