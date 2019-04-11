@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { FilterContext, DataContext } from '../context';
+import { FilterContext } from '../context/filter';
+
+import { DataContext } from '../context/data';
 
 const albumLabels = albums => {
   return albums.reduce((acc, curr) => {
@@ -12,9 +14,26 @@ class Filters extends Component {
   render() {
     return (
       <FilterContext.Consumer>
-        {({ setSortFilter, addLabelFilter, removeLabelFilter, resetLabelFilter, labelFilter }) =>
+        {(filterContext) =>
           <DataContext.Consumer>
-            {(albums) => {
+            {(dataContext) => {
+
+              const {
+                setSortFilter,
+                addLabelFilter,
+                removeLabelFilter,
+                resetLabelFilter,
+                state: {
+                  labelFilter
+                },
+              } = filterContext;
+
+              const {
+                state: {
+                  albums,
+                },
+              } = dataContext;
+
               const labels = albumLabels(albums);
 
               return (
@@ -52,14 +71,15 @@ class Filters extends Component {
                   }
 
                   {labelFilter.length > 0
-                   &&
+                    &&
                     <button onClick={() => {
                       resetLabelFilter()
                     }}>Deselect all</button>
                   }
                   <hr />
                 </div>
-              )}
+              )
+            }
             }
           </DataContext.Consumer>
         }
