@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-const DataContext = React.createContext();
+const DataContext = React.createContext()
 
 export default class DataContextProvider extends Component {
   state = {
@@ -12,7 +12,7 @@ export default class DataContextProvider extends Component {
       this.setState(state => ({
         ...state,
         albums: this.props.albums,
-      }));
+      }))
     }
   }
 
@@ -25,7 +25,7 @@ export default class DataContextProvider extends Component {
           this.setState(state => ({
             ...state,
             albums,
-          }));
+          }))
         },
       }}>
         {this.props.children}
@@ -34,4 +34,4 @@ export default class DataContextProvider extends Component {
   }
 }
 
-export { DataContext };
+export { DataContext }

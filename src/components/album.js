@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Album = ({ title, year, label }) => (
   <div>
@@ -7,6 +7,6 @@ const Album = ({ title, year, label }) => (
     <p><strong>Label:</strong> {label}</p>
     <hr />
   </div>
-);
+)
 
-export default Album;
+export default Album
