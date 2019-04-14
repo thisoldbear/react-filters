@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { FilterContext } from '../context/filter';
+import { FilterContext } from '../context/filter'
 
-import { DataContext } from '../context/data';
+import { DataContext } from '../context/data'
 
 const albumLabels = albums => {
   return albums.reduce((acc, curr) => {
-    return acc.includes(curr.label) ? acc : [curr.label, ...acc];
-  }, []);
+    return acc.includes(curr.label) ? acc : [curr.label, ...acc]
+  }, [])
 }
 
 class Filters extends Component {
@@ -26,15 +26,15 @@ class Filters extends Component {
                 state: {
                   labelFilter
                 },
-              } = filterContext;
+              } = filterContext
 
               const {
                 state: {
                   albums,
                 },
-              } = dataContext;
+              } = dataContext
 
-              const labels = albumLabels(albums);
+              const labels = albumLabels(albums)
 
               return (
                 <div>
@@ -84,8 +84,8 @@ class Filters extends Component {
           </DataContext.Consumer>
         }
       </FilterContext.Consumer>
-    );
+    )
   }
 }
 
-export default Filters;
+export default Filters

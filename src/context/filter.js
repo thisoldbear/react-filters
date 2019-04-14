@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-const FilterContext = React.createContext();
+const FilterContext = React.createContext()
 
 export default class FilterContextProvider extends Component {
   state = {
@@ -17,28 +17,28 @@ export default class FilterContextProvider extends Component {
           this.setState(state => ({
             ...state,
             sortFilter: filter,
-          }));
+          }))
         },
 
         addLabelFilter: (filter) => {
           this.setState(state => ({
             ...state,
             labelFilter: [...this.state.labelFilter, filter],
-          }));
+          }))
         },
 
         removeLabelFilter: (filter) => {
           this.setState(state => ({
             ...state,
             labelFilter: [...this.state.labelFilter].filter(item => item !== filter),
-          }));
+          }))
         },
 
         resetLabelFilter: () => {
           this.setState(state => ({
             ...state,
             labelFilter: [],
-          }));
+          }))
         },
       }}>
         {this.props.children}
@@ -47,4 +47,4 @@ export default class FilterContextProvider extends Component {
   }
 }
 
-export { FilterContext };
+export { FilterContext }

@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import FilterContextProvider from './context/filter';
-import DataContextProvider from './context/data';
+import FilterContextProvider from './context/filter'
+import DataContextProvider from './context/data'
 
-import { fetchAlbums } from './services';
+import { fetchAlbums } from './services'
 
-import Filters from './components/filters';
-import AlbumList from './components/album-list';
+import Filters from './components/filters'
+import AlbumList from './components/album-list'
 
-import './App.css';
+import './App.css'
 
 class App extends React.Component {
   state = {
@@ -16,11 +16,11 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const albums = await fetchAlbums();
+    const albums = await fetchAlbums()
 
     this.setState({
       albums
-    });
+    })
   }
 
   render() {
@@ -38,8 +38,8 @@ class App extends React.Component {
           </FilterContextProvider>
         </DataContextProvider>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
