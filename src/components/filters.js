@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { FilterContext } from '../context/filter'
 
@@ -10,82 +10,78 @@ const albumLabels = albums => {
   }, [])
 }
 
-class Filters extends Component {
-  render() {
-    return (
-      <FilterContext.Consumer>
-        {(filterContext) =>
-          <DataContext.Consumer>
-            {(dataContext) => {
+const Filters = () => (
+  <FilterContext.Consumer>
+    {(filterContext) =>
+      <DataContext.Consumer>
+        {(dataContext) => {
 
-              const {
-                setSortFilter,
-                addLabelFilter,
-                removeLabelFilter,
-                resetLabelFilter,
-                state: {
-                  labelFilter
-                },
-              } = filterContext
+          const {
+            setSortFilter,
+            addLabelFilter,
+            removeLabelFilter,
+            resetLabelFilter,
+            state: {
+              labelFilter
+            },
+          } = filterContext
 
-              const {
-                state: {
-                  albums,
-                },
-              } = dataContext
+          const {
+            state: {
+              albums,
+            },
+          } = dataContext
 
-              const labels = albumLabels(albums)
+          const labels = albumLabels(albums)
 
-              return (
-                <div>
-                  <h2>Sort</h2>
+          return (
+            <div>
+              <h2>Sort</h2>
 
-                  <select onChange={({ target: { value } }) => {
-                    setSortFilter(value)
-                  }}>
-                    <option value="sort-year-low">Sort Year (Low to High)</option>
-                    <option value="sort-year-high">Sort Year (High to Low)</option>
-                    <option value="sort-a-z">Sort A-Z</option>
-                    <option value="sort-z-a">Sort Z-A</option>
-                  </select>
+              <select onChange={({ target: { value } }) => {
+                setSortFilter(value)
+              }}>
+                <option value="sort-year-low">Sort Year (Low to High)</option>
+                <option value="sort-year-high">Sort Year (High to Low)</option>
+                <option value="sort-a-z">Sort A-Z</option>
+                <option value="sort-z-a">Sort Z-A</option>
+              </select>
 
-                  <h3>Filter by label</h3>
+              <h3>Filter by label</h3>
 
-                  {
-                    labels && labels.map(label => {
-                      return (
-                        <div key={label}>
-                          <label>
-                            <input type="checkbox" value={label} onChange={({ target: { value } }) => {
-                              if (labelFilter.includes(label)) {
-                                removeLabelFilter(value)
-                              } else {
-                                addLabelFilter(value)
-                              }
-                            }} checked={labelFilter.includes(label)} />
-                            {label}
-                          </label>
-                        </div>
-                      )
-                    })
-                  }
+              {
+                labels && labels.map(label => {
+                  return (
+                    <div key={label}>
+                      <label>
+                        <input type="checkbox" value={label} onChange={({ target: { value } }) => {
+                          if (labelFilter.includes(label)) {
+                            removeLabelFilter(value)
+                          } else {
+                            addLabelFilter(value)
+                          }
+                        }} checked={labelFilter.includes(label)} />
+                        {label}
+                      </label>
+                    </div>
+                  )
+                })
+              }
 
-                  {labelFilter.length > 0
-                    &&
-                    <button onClick={() => {
-                      resetLabelFilter()
-                    }}>Deselect all</button>
-                  }
-                  <hr />
-                </div>
-              )
-            }
-            }
-          </DataContext.Consumer>
+              {labelFilter.length > 0
+                &&
+                <button onClick={() => {
+                  resetLabelFilter()
+                }}>Deselect all</button>
+              }
+              <hr />
+            </div>
+          )
         }
-      </FilterContext.Consumer>
-    )
-  }
-}
+        }
+      </DataContext.Consumer>
+    }
+  </FilterContext.Consumer>
+)
 
 export default Filters
